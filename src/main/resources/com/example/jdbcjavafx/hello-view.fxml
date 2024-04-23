@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.jdbcjavafx.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<?import javafx.scene.control.PasswordField?>
+<VBox alignment="CENTER" prefHeight="593.0" prefWidth="373.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdbcjavafx.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <children>
+      <Label text="WildGrab">
+         <VBox.margin>
+            <Insets bottom="50.0" />
+         </VBox.margin>
+         <font>
+            <Font name="Arial Bold" size="53.0" />
+         </font>
+      </Label>
+      <FlowPane alignment="CENTER" hgap="10.0" prefHeight="27.0" prefWidth="244.0" vgap="10.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="61.0" text="Username" />
+            <TextField id="txtUsername" fx:id="txtUsername" minWidth="-Infinity" prefHeight="26.0" prefWidth="170.0" />
+         </children>
+      </FlowPane>
+      <FlowPane alignment="CENTER" hgap="10.0" prefHeight="27.0" prefWidth="244.0" vgap="10.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="61.0" text="Password" />
+            <PasswordField id="txtPassword" fx:id="txtPassword" minWidth="-Infinity" prefHeight="26.0" prefWidth="171.0" />
+         </children>
+      </FlowPane>
+      <Button id="btnLogin" fx:id="btnLogin" mnemonicParsing="false" onMouseClicked="#Login" prefHeight="26.0" prefWidth="254.0" text="Login">
+         <VBox.margin>
+            <Insets top="50.0" />
+         </VBox.margin>
+      </Button>
+      <Label text="Don't have an account?" />
+      <Button id="btnRegister" fx:id="btnRegister" mnemonicParsing="false" onMouseClicked="#GoToRegister" prefHeight="26.0" prefWidth="246.0" text="Go To Register" />
+   </children>
 </VBox>
