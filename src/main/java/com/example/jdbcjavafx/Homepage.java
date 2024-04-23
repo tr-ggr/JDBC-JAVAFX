@@ -118,7 +118,6 @@ public class Homepage {
         Parent root = FXMLLoader.load(getClass().getResource("add-credits.fxml"));
         Scene homepageScene = new Scene(root);
 
-        // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(homepageScene);
         window.setResizable(false);
@@ -131,7 +130,6 @@ public class Homepage {
         Parent root = FXMLLoader.load(getClass().getResource("create-listing.fxml"));
         Scene homepageScene = new Scene(root);
 
-        // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(homepageScene);
         window.setResizable(false);
@@ -144,9 +142,9 @@ public class Homepage {
         Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene homepageScene = new Scene(root);
 
-        // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(homepageScene);
+        window.setResizable(false);
         window.show();
     }
 

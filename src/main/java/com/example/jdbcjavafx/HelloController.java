@@ -39,7 +39,6 @@ public class HelloController {
         Parent root = FXMLLoader.load(getClass().getResource("register-page.fxml"));
         Scene registerScene = new Scene(root);
 
-        // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setResizable(false);
         window.setScene(registerScene);
@@ -68,7 +67,6 @@ public class HelloController {
                 Parent root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
                 Scene homepageScene = new Scene(root);
 
-                // Get the Stage from the event and set the new scene
                 Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
                 window.setScene(homepageScene);
                 window.setResizable(false);

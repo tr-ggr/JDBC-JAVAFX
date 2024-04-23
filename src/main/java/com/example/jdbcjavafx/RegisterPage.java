@@ -41,7 +41,6 @@ public class RegisterPage {
         Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         Scene registerScene = new Scene(root);
 
-        // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(registerScene);
         window.setResizable(false);
@@ -65,12 +64,10 @@ public class RegisterPage {
         System.out.println(username + " " + password + " " + type);
 
         try(Connection c = MySQLConnection.getConnection()) {
-            // Check if the user already exists
             PreparedStatement checkUser = c.prepareStatement("SELECT * FROM tblusers WHERE name = ?");
             checkUser.setString(1, username);
             ResultSet resultSet = checkUser.executeQuery();
 
-            // If the user does not exist, insert the new user
             if (!resultSet.next()) {
                 PreparedStatement s = c.prepareStatement("INSERT INTO tblusers (name, password, isSeller) VALUES (?, ?, ?)");
                 s.setString(1, username);
