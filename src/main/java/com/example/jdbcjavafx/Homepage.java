@@ -22,6 +22,10 @@ public class Homepage {
     private Button btnAddCredits;
 
     @FXML
+    private Label txtWelcome;
+
+
+    @FXML
     private Button btnListing;
 
     @FXML
@@ -51,8 +55,9 @@ public class Homepage {
     //declare observable list for database data
     ObservableList<Product> products = FXCollections.observableArrayList();
 
-    @FXML
-    public void initialize() {
+    public void RefreshTable(){
+        products.clear();
+
         try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbtolentino", "root", "")) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM tblproducts");
@@ -62,23 +67,34 @@ public class Homepage {
                 String seller = rs.getString("seller");
                 String cost = rs.getString("cost");
                 String date = rs.getDate("date").toString();
-                Product product = new Product(id, name, seller, cost, date);
+                Product product = new Product(id, name, cost, seller, date);
                 products.add(product);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        tableview.setItems(products);
+    }
+
+    @FXML
+    public void initialize() {
+        txtWelcome.setText("Welcome, " + HelloController.user.name + "!");
+
+        RefreshTable();
 
 
         clmnID.setCellValueFactory(
                 new PropertyValueFactory<>("id")
         );
-        clmnName.setCellValueFactory(
-                new PropertyValueFactory<>("name")
-        );
         clmnCost.setCellValueFactory(
                 new PropertyValueFactory<>("cost")
         );
+        clmnName.setCellValueFactory(
+                new PropertyValueFactory<>("name")
+        );
+
         clmnSeller.setCellValueFactory(
                 new PropertyValueFactory<>("seller")
         );
@@ -91,6 +107,8 @@ public class Homepage {
         if(!HelloController.user.isSeller) {
             btnListing.setDisable(true);
         }
+
+        txtCredits.setText("Credits: $" + HelloController.user.credits);
     }
 
 
@@ -103,6 +121,7 @@ public class Homepage {
         // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(homepageScene);
+        window.setResizable(false);
         window.show();
 
     }
@@ -115,6 +134,7 @@ public class Homepage {
         // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(homepageScene);
+        window.setResizable(false);
         window.show();
     }
 
@@ -132,20 +152,69 @@ public class Homepage {
 
     @FXML
     void BuyProduct(MouseEvent event) {
-        try{
+        Product product = tableview.getSelectionModel().getSelectedItem();
+        if(product.getSeller().equals(HelloController.user.name)){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Couldn't buy your own Product!");
+            a.show();
+            return;
+        }
 
-            Product product = tableview.getSelectionModel().getSelectedItem();
-            System.out.println(product.getId());
+        if(product.getCost() > HelloController.user.credits) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Insufficient Credits!");
+            a.show();
+            return;
+        }
+
+        try(Connection c = MySQLConnection.getConnection();
+            Statement s = c.createStatement()) {
+            c.setAutoCommit(false);
+            String sql = "UPDATE tblusers SET credits = " + (HelloController.user.credits - product.getCost()) + " WHERE id = " + HelloController.user.id;
+
+            s.execute(sql);
+
+            sql = "SELECT * FROM tblusers WHERE name = '" + product.getSeller() + "'";
+
+            ResultSet rs = s.executeQuery(sql);
+
+            if(rs.next()){
+                int sellerCredits = rs.getInt("credits");
+                sql = "UPDATE tblusers SET credits = " + (sellerCredits + product.getCost()) + " WHERE name = '" + product.getSeller() + "'";
+                s.execute(sql);
+            }
+
+            sql = "DELETE FROM tblproducts WHERE id = " + tableview.getSelectionModel().getSelectedItem().getId();
+
+            s.execute(sql);
+
+            c.commit();
+
+            RefreshTable();
+
+            HelloController.user.credits -= product.getCost();
+            txtCredits.setText("Credits: $" + HelloController.user.credits);
+
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("SUCCESSFULLY PURCHASED " + product.getName() + " FOR $" + product.getCost());
+            a.show();
+
+
+
 
         }catch (Exception e){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("PLEASE SELECT A PRODUCT");
             a.show();
+
+            e.printStackTrace();
         }
 
 
 
     }
+
 
 
 }

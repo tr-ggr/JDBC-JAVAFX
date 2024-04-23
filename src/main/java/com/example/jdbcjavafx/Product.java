@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
 public class Product {
     private final IntegerProperty id;
     private final StringProperty name;
-    private final StringProperty seller;
     private final StringProperty cost;
+    private final StringProperty seller;
     private final StringProperty date;
 
     public Product(Integer id, String name, String cost, String seller, String date){
@@ -32,8 +32,8 @@ public class Product {
         return id;
     }
 
-    public String getCost() {
-        return cost.get();
+    public int getCost() {
+        return Integer.parseInt(cost.get());
     }
 
     public StringProperty costProperty() {

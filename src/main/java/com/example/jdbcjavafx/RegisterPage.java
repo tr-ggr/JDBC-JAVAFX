@@ -44,11 +44,21 @@ public class RegisterPage {
         // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(registerScene);
+        window.setResizable(false);
         window.show();
     }
 
     @FXML
     void Register(MouseEvent event) {
+        if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty() ||
+                Type.getSelectedToggle() == null){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Please fill in all fields!");
+            a.show();
+            return;
+        }
+
+
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         String type = ((RadioButton) Type.getSelectedToggle()).getText();
@@ -67,9 +77,16 @@ public class RegisterPage {
                 s.setString(2, password);
                 s.setInt(3, (type.equals("Seller") ? 1 : 0));
                 s.execute();
-                System.out.println("Successfully Registered!");
+
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("User registered successfully!");
+                a.show();
             } else {
                 System.out.println("User already exists!");
+
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("User already exists!");
+                a.show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -21,16 +21,6 @@
                 <Font name="Arial Bold" size="53.0" />
             </font>
         </Label>
-      <Label fx:id="lblCredits" text="Your Credits: ">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblCost" text="Total Cost: ">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
       <Label text="Listing an item has an added tax of 5% from the Cost" />
         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="27.0" prefWidth="244.0" vgap="10.0">
             <children>

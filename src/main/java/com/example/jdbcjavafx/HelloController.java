@@ -25,6 +25,7 @@ public class HelloController {
     @FXML
     private Button btnRegister;
 
+
     @FXML
     private PasswordField txtPassword;
 
@@ -40,6 +41,7 @@ public class HelloController {
 
         // Get the Stage from the event and set the new scene
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setResizable(false);
         window.setScene(registerScene);
         window.show();
     }
@@ -69,6 +71,7 @@ public class HelloController {
                 // Get the Stage from the event and set the new scene
                 Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
                 window.setScene(homepageScene);
+                window.setResizable(false);
                 window.show();
 
             } else {
