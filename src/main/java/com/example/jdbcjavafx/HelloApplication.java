@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
         stage.setResizable(false);
         stage.show();
 
-
+        
         try(Connection c = MySQLConnection.getConnection();
             Statement s = c.createStatement()) {
             s.execute("CREATE TABLE IF NOT EXISTS " +

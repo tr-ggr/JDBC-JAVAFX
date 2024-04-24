@@ -24,6 +24,11 @@ public class Homepage {
     @FXML
     private Label txtWelcome;
 
+    @FXML
+    private Button btnDeleteListing;
+
+    @FXML
+    private Button btnEditListing;
 
     @FXML
     private Button btnListing;
@@ -51,6 +56,8 @@ public class Homepage {
 
     @FXML
     private Label txtCredits;
+
+    static Product editProduct;
 
     //declare observable list for database data
     ObservableList<Product> products = FXCollections.observableArrayList();
@@ -105,7 +112,9 @@ public class Homepage {
         tableview.setItems(products);
 
         if(!HelloController.user.isSeller) {
-            btnListing.setDisable(true);
+            btnListing.setVisible(false);
+            btnDeleteListing.setVisible(false);
+            btnEditListing.setVisible(false);
         }
 
         txtCredits.setText("Credits: $" + HelloController.user.credits);
@@ -211,6 +220,63 @@ public class Homepage {
 
 
 
+    }
+
+
+    @FXML
+    void DeleteProduct(MouseEvent event) {
+        Product product = tableview.getSelectionModel().getSelectedItem();
+        if(!product.getSeller().equals(HelloController.user.name)){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Could only delete your own Product!");
+            a.show();
+            return;
+        }
+
+        try(Connection c = MySQLConnection.getConnection();
+            Statement s = c.createStatement()) {
+            String sql = "DELETE FROM tblproducts WHERE id = " + tableview.getSelectionModel().getSelectedItem().getId();
+            s.execute(sql);
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("Product deleted successfully!");
+            a.show();
+
+            RefreshTable();
+
+        } catch (SQLException e) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("PLEASE SELECT A PRODUCT");
+            a.show();
+
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void EditProduct(MouseEvent event) {
+        Product product = tableview.getSelectionModel().getSelectedItem();
+        if(!product.getSeller().equals(HelloController.user.name)){
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Could only edit your own Product!");
+            a.show();
+            return;
+        }
+
+        editProduct = product;
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("edit-listing.fxml"));
+            Scene homepageScene = new Scene(root);
+
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(homepageScene);
+            window.setResizable(false);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

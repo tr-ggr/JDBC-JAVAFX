@@ -31,9 +31,9 @@
       </HBox>
       <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button fx:id="btnLogout" mnemonicParsing="false" onMouseClicked="#Logout" text="Logout" />
-            <Button fx:id="btnListing" mnemonicParsing="false" onMouseClicked="#CreateListing" prefHeight="26.0" prefWidth="210.0" text="Create Listing" />
-            <Button fx:id="btnAddCredits" mnemonicParsing="false" onMouseClicked="#AddCredits" prefHeight="26.0" prefWidth="86.0" text="Add Credits" />
+          <Button fx:id="btnLogout" mnemonicParsing="false" onMouseClicked="#Logout" prefHeight="26.0" prefWidth="86.0" text="Logout" />
+            <Button fx:id="btnListing" mnemonicParsing="false" onMouseClicked="#CreateListing" prefHeight="26.0" prefWidth="180.0" text="Create Listing" />
+            <Button fx:id="btnAddCredits" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#AddCredits" prefHeight="26.0" prefWidth="86.0" text="Add Credits" />
         </items>
       </ToolBar>
       <TableView fx:id="tableview" prefHeight="518.0" prefWidth="374.0">
@@ -45,10 +45,27 @@
             <TableColumn fx:id="clmnOption" prefWidth="102.4000244140625" text="Date Added" />
         </columns>
       </TableView>
-      <Button fx:id="btnBuy" mnemonicParsing="false" onMouseClicked="#BuyProduct" prefHeight="52.0" prefWidth="374.0" text="Buy Product">
-         <font>
-            <Font size="41.0" />
-         </font>
-      </Button>
+      <HBox prefHeight="100.0" prefWidth="374.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnEditListing" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#EditProduct" prefHeight="50.0" prefWidth="222.0" text="Edit Listing">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnBuy" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#BuyProduct" prefHeight="50.0" prefWidth="222.0" text="Buy Product">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDeleteListing" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#DeleteProduct" prefHeight="50.0" prefWidth="222.0" text="Delete Listing">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
    </children>
 </VBox>
