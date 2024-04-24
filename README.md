@@ -24,7 +24,7 @@ Delete
   - SetAutocommit is set to false on buying an item in order to prevent race conditions from happening
 
 Views Showcase
-=====
+----
 
 ### Login
 ![image](https://github.com/tr-ggr/JDBC-JAVAFX/assets/132801873/fce67f4f-4396-45ec-9894-9fcb931516d2)
