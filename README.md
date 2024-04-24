@@ -27,15 +27,18 @@ Views Showcase
 ----
 
 ### Login
-![image](https://github.com/tr-ggr/JDBC-JAVAFX/assets/132801873/fce67f4f-4396-45ec-9894-9fcb931516d2)
+![image](https://github.com/tr-ggr/JDBC-JAVAFX/assets/132801873/d437a277-d110-490d-8174-b1477e883007)
+
 
 
 ### Buyer Homepage
-![image](https://github.com/tr-ggr/JDBC-JAVAFX/assets/132801873/99e3962d-1b96-4e94-84d2-e58bb602301c)
+![image](https://github.com/tr-ggr/JDBC-JAVAFX/assets/132801873/9d29a06e-349e-4523-95e6-5d25c1a785c9)
+
 
 
 ### Seller Homepage
-![image](https://github.com/tr-ggr/JDBC-JAVAFX/assets/132801873/51d9c24e-d45e-4845-8be6-060b6ab28bd5)
+![image](https://github.com/tr-ggr/JDBC-JAVAFX/assets/132801873/3f8f60c6-101b-422a-ab84-d161a831b516)
+
 
 ###### Made with love by Tristan James Y. Tolentino x JavaFX and BINI music
 
