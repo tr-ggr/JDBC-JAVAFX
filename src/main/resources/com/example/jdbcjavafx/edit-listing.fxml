@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="593.0" prefWidth="373.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdbcjavafx.EditListing">
+<VBox alignment="CENTER" prefHeight="593.0" prefWidth="373.0" spacing="20.0" style="-fx-background-color: #DF2E38;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdbcjavafx.EditListing">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <children>
-        <Label text="Edit Product">
+        <Label style="-fx-text-fill: #FDFDFD;" text="Edit Product">
             <VBox.margin>
                 <Insets bottom="50.0" />
             </VBox.margin>
@@ -21,24 +21,24 @@
                 <Font name="Arial Bold" size="53.0" />
             </font>
         </Label>
-        <Label text="Editing an item has an added tax of 5% from the Cost" />
+        <Label style="-fx-text-fill: #89c4f4;" text="Editing an item has an added tax of 5% from the Cost" />
         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="27.0" prefWidth="244.0" vgap="10.0">
             <children>
-                <Label prefHeight="18.0" prefWidth="83.0" text="Product Name" />
+                <Label prefHeight="18.0" prefWidth="83.0" style="-fx-text-fill: #FDFDFD;" text="Product Name" />
                 <TextField id="txtUsername" fx:id="txtProductName" minWidth="-Infinity" prefHeight="26.0" prefWidth="170.0" />
             </children>
         </FlowPane>
         <FlowPane alignment="CENTER" hgap="10.0" prefHeight="27.0" prefWidth="244.0" vgap="10.0">
             <children>
-                <Label prefHeight="18.0" prefWidth="83.0" text="Cost" />
+                <Label prefHeight="18.0" prefWidth="83.0" style="-fx-text-fill: #FDFDFD;" text="Cost" />
                 <TextField id="txtUsername" fx:id="txtCost" minWidth="-Infinity" prefHeight="26.0" prefWidth="170.0" />
             </children>
         </FlowPane>
-        <Button id="btnLogin" fx:id="btnEditProduct" mnemonicParsing="false" onMouseClicked="#EditProduct" prefHeight="26.0" prefWidth="254.0" text="Edit Product">
+        <Button id="btnLogin" fx:id="btnEditProduct" mnemonicParsing="false" onMouseClicked="#EditProduct" prefHeight="26.0" prefWidth="254.0" style="-fx-background-color: #b7f4d8;" text="Edit Product">
             <VBox.margin>
                 <Insets top="50.0" />
             </VBox.margin>
         </Button>
-        <Button id="btnRegister" fx:id="btnBack" mnemonicParsing="false" onMouseClicked="#GoBack" prefHeight="26.0" prefWidth="254.0" text="Go Back" />
+        <Button id="btnRegister" fx:id="btnBack" mnemonicParsing="false" onMouseClicked="#GoBack" prefHeight="26.0" prefWidth="254.0" style="-fx-background-color: RED; -fx-text-fill: #FDFDFD;" text="Go Back" />
     </children>
 </VBox>

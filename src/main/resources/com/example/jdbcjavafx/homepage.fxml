@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="593.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdbcjavafx.Homepage">
+<VBox prefHeight="593.0" prefWidth="373.0" style="-fx-background-color: #DF2E38;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jdbcjavafx.Homepage">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="txtWelcome" prefHeight="27.0" prefWidth="310.0" text="Welcome">
+            <Label fx:id="txtWelcome" prefHeight="27.0" prefWidth="310.0" style="-fx-text-fill: #FDFDFD;" text="Welcome">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="txtCredits" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="210.0" text="Credits: $0">
+            <Label fx:id="txtCredits" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="210.0" style="-fx-text-fill: #FDFDFD;" text="Credits: $0">
                <font>
                   <Font size="11.0" />
                </font>
@@ -29,11 +29,11 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </HBox>
-      <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
+      <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #FDFDFD;">
         <items>
-          <Button fx:id="btnLogout" mnemonicParsing="false" onMouseClicked="#Logout" prefHeight="26.0" prefWidth="86.0" text="Logout" />
-            <Button fx:id="btnListing" mnemonicParsing="false" onMouseClicked="#CreateListing" prefHeight="26.0" prefWidth="180.0" text="Create Listing" />
-            <Button fx:id="btnAddCredits" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#AddCredits" prefHeight="26.0" prefWidth="86.0" text="Add Credits" />
+          <Button fx:id="btnLogout" mnemonicParsing="false" onMouseClicked="#Logout" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: red; -fx-text-fill: #fdfdfd;" text="Logout" />
+            <Button fx:id="btnListing" mnemonicParsing="false" onMouseClicked="#CreateListing" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: blue; -fx-text-fill: #fdfdfd;" text="Create Listing" />
+            <Button fx:id="btnAddCredits" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#AddCredits" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: green; -fx-text-fill: #fdfdfd;" text="Add Credits" />
         </items>
       </ToolBar>
       <TableView fx:id="tableview" prefHeight="518.0" prefWidth="374.0">
@@ -47,17 +47,17 @@
       </TableView>
       <HBox prefHeight="100.0" prefWidth="374.0" spacing="10.0">
          <children>
-            <Button fx:id="btnEditListing" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#EditProduct" prefHeight="50.0" prefWidth="222.0" text="Edit Listing">
+            <Button fx:id="btnEditListing" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#EditProduct" prefHeight="50.0" prefWidth="222.0" style="-fx-background-color: #F3E99F;" text="Edit Listing">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
-            <Button fx:id="btnBuy" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#BuyProduct" prefHeight="50.0" prefWidth="222.0" text="Buy Product">
+            <Button fx:id="btnBuy" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#BuyProduct" prefHeight="50.0" prefWidth="222.0" style="-fx-background-color: #F3E99F;" text="Buy Product">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
-            <Button fx:id="btnDeleteListing" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#DeleteProduct" prefHeight="50.0" prefWidth="222.0" text="Delete Listing">
+            <Button fx:id="btnDeleteListing" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#DeleteProduct" prefHeight="50.0" prefWidth="222.0" style="-fx-background-color: #F3E99F;" text="Delete Listing">
                <font>
                   <Font size="11.0" />
                </font>

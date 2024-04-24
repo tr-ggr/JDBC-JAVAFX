@@ -101,7 +101,6 @@ public class Homepage {
         clmnName.setCellValueFactory(
                 new PropertyValueFactory<>("name")
         );
-
         clmnSeller.setCellValueFactory(
                 new PropertyValueFactory<>("seller")
         );
