@@ -18,3 +18,6 @@ Delete
   - Items are deleted after buying (ALL USERS)
   - Items can be deleted by owner (SELLER ONLY)
 
+**Atomicity**
+  - SetAutocommit is set to false on buying an item in order to prevent race conditions from happening
+
