@@ -159,58 +159,63 @@ public class Homepage {
 
     @FXML
     void BuyProduct(MouseEvent event) {
-        Product product = tableview.getSelectionModel().getSelectedItem();
-        if(product.getSeller().equals(HelloController.user.name)){
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Couldn't buy your own Product!");
-            a.show();
-            return;
-        }
-
-        if(product.getCost() > HelloController.user.credits) {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Insufficient Credits!");
-            a.show();
-            return;
-        }
-
-        try(Connection c = MySQLConnection.getConnection();
-            Statement s = c.createStatement()) {
-            c.setAutoCommit(false);
-            String sql = "UPDATE tblusers SET credits = " + (HelloController.user.credits - product.getCost()) + " WHERE id = " + HelloController.user.id;
-
-            s.execute(sql);
-
-            sql = "SELECT * FROM tblusers WHERE name = '" + product.getSeller() + "'";
-
-            ResultSet rs = s.executeQuery(sql);
-
-            if(rs.next()){
-                int sellerCredits = rs.getInt("credits");
-                sql = "UPDATE tblusers SET credits = " + (sellerCredits + product.getCost()) + " WHERE name = '" + product.getSeller() + "'";
-                s.execute(sql);
+        try {
+            Product product = tableview.getSelectionModel().getSelectedItem();
+            if (product.getSeller().equals(HelloController.user.name)) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Couldn't buy your own Product!");
+                a.show();
+                return;
             }
 
-            sql = "DELETE FROM tblproducts WHERE id = " + tableview.getSelectionModel().getSelectedItem().getId();
+            if (product.getCost() > HelloController.user.credits) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Insufficient Credits!");
+                a.show();
+                return;
+            }
 
-            s.execute(sql);
+            try (Connection c = MySQLConnection.getConnection();
+                 Statement s = c.createStatement()) {
+                c.setAutoCommit(false);
+                String sql = "UPDATE tblusers SET credits = " + (HelloController.user.credits - product.getCost()) + " WHERE id = " + HelloController.user.id;
 
-            c.commit();
+                s.execute(sql);
 
-            RefreshTable();
+                sql = "SELECT * FROM tblusers WHERE name = '" + product.getSeller() + "'";
 
-            HelloController.user.credits -= product.getCost();
-            txtCredits.setText("Credits: $" + HelloController.user.credits);
+                ResultSet rs = s.executeQuery(sql);
+
+                if (rs.next()) {
+                    int sellerCredits = rs.getInt("credits");
+                    sql = "UPDATE tblusers SET credits = " + (sellerCredits + product.getCost()) + " WHERE name = '" + product.getSeller() + "'";
+                    s.execute(sql);
+                }
+
+                sql = "DELETE FROM tblproducts WHERE id = " + tableview.getSelectionModel().getSelectedItem().getId();
+
+                s.execute(sql);
+
+                c.commit();
+
+                RefreshTable();
+
+                HelloController.user.credits -= product.getCost();
+                txtCredits.setText("Credits: $" + HelloController.user.credits);
 
 
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setContentText("SUCCESSFULLY PURCHASED " + product.getName() + " FOR $" + product.getCost());
-            a.show();
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("SUCCESSFULLY PURCHASED " + product.getName() + " FOR $" + product.getCost());
+                a.show();
 
+            } catch (Exception e) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("PLEASE SELECT A PRODUCT");
+                a.show();
 
-
-
-        }catch (Exception e){
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("PLEASE SELECT A PRODUCT");
             a.show();
@@ -225,27 +230,36 @@ public class Homepage {
 
     @FXML
     void DeleteProduct(MouseEvent event) {
-        Product product = tableview.getSelectionModel().getSelectedItem();
-        
-        if(!product.getSeller().equals(HelloController.user.name)){
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Could only delete your own Product!");
-            a.show();
-            return;
-        }
+        try{
+            Product product = tableview.getSelectionModel().getSelectedItem();
 
-        try(Connection c = MySQLConnection.getConnection();
-            Statement s = c.createStatement()) {
-            String sql = "DELETE FROM tblproducts WHERE id = " + tableview.getSelectionModel().getSelectedItem().getId();
-            s.execute(sql);
+            if(!product.getSeller().equals(HelloController.user.name)){
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Could only delete your own Product!");
+                a.show();
+                return;
+            }
 
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setContentText("Product deleted successfully!");
-            a.show();
+            try(Connection c = MySQLConnection.getConnection();
+                Statement s = c.createStatement()) {
+                String sql = "DELETE FROM tblproducts WHERE id = " + tableview.getSelectionModel().getSelectedItem().getId();
+                s.execute(sql);
 
-            RefreshTable();
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Product deleted successfully!");
+                a.show();
 
-        } catch (SQLException e) {
+                RefreshTable();
+
+            } catch (SQLException e) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("PLEASE SELECT A PRODUCT");
+                a.show();
+
+                e.printStackTrace();
+            }
+
+        } catch (Exception e){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("PLEASE SELECT A PRODUCT");
             a.show();
@@ -253,29 +267,40 @@ public class Homepage {
             e.printStackTrace();
         }
 
+
     }
 
     @FXML
     void EditProduct(MouseEvent event) {
-        Product product = tableview.getSelectionModel().getSelectedItem();
-        if(!product.getSeller().equals(HelloController.user.name)){
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Could only edit your own Product!");
-            a.show();
-            return;
-        }
-
-        editProduct = product;
-
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("edit-listing.fxml"));
-            Scene homepageScene = new Scene(root);
 
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            window.setScene(homepageScene);
-            window.setResizable(false);
-            window.show();
-        } catch (IOException e) {
+
+            Product product = tableview.getSelectionModel().getSelectedItem();
+            if (!product.getSeller().equals(HelloController.user.name)) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Could only edit your own Product!");
+                a.show();
+                return;
+            }
+
+            editProduct = product;
+
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("edit-listing.fxml"));
+                Scene homepageScene = new Scene(root);
+
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.setScene(homepageScene);
+                window.setResizable(false);
+                window.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("PLEASE SELECT A PRODUCT");
+            a.show();
+
             e.printStackTrace();
         }
     }
