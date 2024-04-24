@@ -65,7 +65,7 @@ public class Homepage {
     public void RefreshTable(){
         products.clear();
 
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbtolentino", "root", "")) {
+        try(Connection conn = MySQLConnection.getConnection()) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM tblproducts");
             while(rs.next()) {
