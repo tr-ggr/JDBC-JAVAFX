@@ -63,8 +63,9 @@ public class RegisterPage {
         String type = ((RadioButton) Type.getSelectedToggle()).getText();
         System.out.println(username + " " + password + " " + type);
 
-        try(Connection c = MySQLConnection.getConnection()) {
-            PreparedStatement checkUser = c.prepareStatement("SELECT * FROM tblusers WHERE name = ?");
+        try(Connection c = MySQLConnection.getConnection();
+            PreparedStatement checkUser = c.prepareStatement("SELECT * FROM tblusers WHERE name = ?");) {
+
             checkUser.setString(1, username);
             ResultSet resultSet = checkUser.executeQuery();
 

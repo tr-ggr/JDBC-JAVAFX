@@ -226,6 +226,7 @@ public class Homepage {
     @FXML
     void DeleteProduct(MouseEvent event) {
         Product product = tableview.getSelectionModel().getSelectedItem();
+        
         if(!product.getSeller().equals(HelloController.user.name)){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Could only delete your own Product!");
