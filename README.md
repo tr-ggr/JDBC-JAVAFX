@@ -1,4 +1,4 @@
-**Wild Market: A Market for Teknoys**
+**WildMarket: A Market for Teknoys**
 ======
 
 
@@ -37,5 +37,5 @@ Views Showcase
 ### Seller Homepage
 ![image](https://github.com/tr-ggr/JDBC-JAVAFX/assets/132801873/51d9c24e-d45e-4845-8be6-060b6ab28bd5)
 
-###### Made with love by Tristan James Y. Tolentino
+###### Made with love by Tristan James Y. Tolentino x JavaFX and BINI music
 
