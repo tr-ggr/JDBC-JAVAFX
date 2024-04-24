@@ -34,6 +34,7 @@ public class AddCredits {
     @FXML
     void Deposit(MouseEvent event) {
         int credits;
+        //Hello
         try{
             credits = Integer.parseInt(txtCredits.getText());
         } catch (Exception e){
