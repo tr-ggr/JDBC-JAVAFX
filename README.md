@@ -2,7 +2,7 @@
 ======
 
 
-### **CRUD GUIDELINES:**
+### **CRUD GUIDELINES**
 
 
 Create 
